@@ -3,7 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 import 'package:firebase_auth/firebase_auth.dart';
 
- class StorageActions{
+ mixin StorageActions{
   String dawenlaodUri = "";
   String _filename = '';
   String _directory = '';
