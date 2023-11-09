@@ -1,6 +1,6 @@
 import 'package:users_module/modele/base_model/base_user_module.dart';
 
-class UserModule extends BaseUsersModel {
+class UserModule extends UsersBaseModel {
   static const String addressKey = "address";
   static const String phoneKey = "phone";
   static String typeKey = "type";
@@ -14,10 +14,10 @@ class UserModule extends BaseUsersModel {
       String? id,
       String? name,
       String? email})
-      : super(email: email, id: id, name: name);
+      : super(email: email, uid: id, name: name);
 
   UserModule.formJson(Map<String, dynamic> json) {
-    id = json['id'] == null ? null : json['id'];
+    uid = json['uid'] == null ? null : json['uid'];
     name = json['name'] == null ? null : json['name'];
     email = json['email'] == null ? null : json['email'];
     address = json['address'] == null ? null : json['address'];
@@ -26,7 +26,7 @@ class UserModule extends BaseUsersModel {
   }
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
-    _data['id'] = id;
+    _data['uid'] = uid;
     _data['name'] = name;
     _data['email'] = email;
     _data['address'] = address;

@@ -1,20 +1,27 @@
-class BaseModel {
-  BaseModel({
-    this.status,
-    this.message,
-  });
-   String? status;
-   String? message;
+import 'package:users_module/https/commerce_http_urls.dart';
 
-  BaseModel.fromJson(Map<String, dynamic> json){
-    status = json['status'];
-    message = json['message'];
+class RemoteBaseModel<T> {
+
+  RemoteBaseModel({
+    this.status,
+    this.message,this.data
+  });
+  String? status;
+  String? message;
+T?data ;
+  factory RemoteBaseModel.fromJson(Map<String, dynamic> json) {
+    return RemoteBaseModel(
+      status: json['${UsersUrlEnveiroment().endPoints.status}']??"" as String?,
+      message: json['${UsersUrlEnveiroment().endPoints.message}']??"" as String?,
+      data: json['${UsersUrlEnveiroment().endPoints.data}']??"" as T?,
+    );
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
-    _data['status'] = status;
-    _data['message'] = message;
+    _data['${UsersUrlEnveiroment().endPoints.status}'] = status;
+    _data['${UsersUrlEnveiroment().endPoints.message}'] = message;
+    _data['${UsersUrlEnveiroment().endPoints.data}'] = data;
     return _data;
   }
 }

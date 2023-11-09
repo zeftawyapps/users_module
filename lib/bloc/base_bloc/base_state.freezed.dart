@@ -21,7 +21,7 @@ mixin _$BaseState<T> {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(T? model) success,
-    required TResult Function(BaseModel error, VoidCallback callback) failure,
+    required TResult Function(RemoteBaseModel error, VoidCallback callback) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +29,7 @@ mixin _$BaseState<T> {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(T? model)? success,
-    TResult Function(BaseModel error, VoidCallback callback)? failure,
+    TResult Function(RemoteBaseModel error, VoidCallback callback)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +37,7 @@ mixin _$BaseState<T> {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(T? model)? success,
-    TResult Function(BaseModel error, VoidCallback callback)? failure,
+    TResult Function(RemoteBaseModel error, VoidCallback callback)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,7 +125,7 @@ class _$_Init<T> implements _Init<T> {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(T? model) success,
-    required TResult Function(BaseModel error, VoidCallback callback) failure,
+    required TResult Function(RemoteBaseModel error, VoidCallback callback) failure,
   }) {
     return init();
   }
@@ -136,7 +136,7 @@ class _$_Init<T> implements _Init<T> {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(T? model)? success,
-    TResult Function(BaseModel error, VoidCallback callback)? failure,
+    TResult Function(RemoteBaseModel error, VoidCallback callback)? failure,
   }) {
     return init?.call();
   }
@@ -147,7 +147,7 @@ class _$_Init<T> implements _Init<T> {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(T? model)? success,
-    TResult Function(BaseModel error, VoidCallback callback)? failure,
+    TResult Function(RemoteBaseModel error, VoidCallback callback)? failure,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -241,7 +241,7 @@ class _$_Loading<T> implements _Loading<T> {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(T? model) success,
-    required TResult Function(BaseModel error, VoidCallback callback) failure,
+    required TResult Function(RemoteBaseModel error, VoidCallback callback) failure,
   }) {
     return loading();
   }
@@ -252,7 +252,7 @@ class _$_Loading<T> implements _Loading<T> {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(T? model)? success,
-    TResult Function(BaseModel error, VoidCallback callback)? failure,
+    TResult Function(RemoteBaseModel error, VoidCallback callback)? failure,
   }) {
     return loading?.call();
   }
@@ -263,7 +263,7 @@ class _$_Loading<T> implements _Loading<T> {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(T? model)? success,
-    TResult Function(BaseModel error, VoidCallback callback)? failure,
+    TResult Function(RemoteBaseModel error, VoidCallback callback)? failure,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -381,7 +381,7 @@ class _$_Success<T> implements _Success<T> {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(T? model) success,
-    required TResult Function(BaseModel error, VoidCallback callback) failure,
+    required TResult Function(RemoteBaseModel error, VoidCallback callback) failure,
   }) {
     return success(model);
   }
@@ -392,7 +392,7 @@ class _$_Success<T> implements _Success<T> {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(T? model)? success,
-    TResult Function(BaseModel error, VoidCallback callback)? failure,
+    TResult Function(RemoteBaseModel error, VoidCallback callback)? failure,
   }) {
     return success?.call(model);
   }
@@ -403,7 +403,7 @@ class _$_Success<T> implements _Success<T> {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(T? model)? success,
-    TResult Function(BaseModel error, VoidCallback callback)? failure,
+    TResult Function(RemoteBaseModel error, VoidCallback callback)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -464,7 +464,7 @@ abstract class _$$_FailureCopyWith<T, $Res> {
   factory _$$_FailureCopyWith(
           _$_Failure<T> value, $Res Function(_$_Failure<T>) then) =
       __$$_FailureCopyWithImpl<T, $Res>;
-  $Res call({BaseModel error, VoidCallback callback});
+  $Res call({RemoteBaseModel error, VoidCallback callback});
 }
 
 /// @nodoc
@@ -486,7 +486,7 @@ class __$$_FailureCopyWithImpl<T, $Res> extends _$BaseStateCopyWithImpl<T, $Res>
       error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as BaseModel,
+              as RemoteBaseModel,
       callback == freezed
           ? _value.callback
           : callback // ignore: cast_nullable_to_non_nullable
@@ -501,7 +501,7 @@ class _$_Failure<T> implements _Failure<T> {
   const _$_Failure(this.error, this.callback);
 
   @override
-  final BaseModel error;
+  final RemoteBaseModel error;
   @override
   final VoidCallback callback;
 
@@ -535,7 +535,7 @@ class _$_Failure<T> implements _Failure<T> {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(T? model) success,
-    required TResult Function(BaseModel error, VoidCallback callback) failure,
+    required TResult Function(RemoteBaseModel error, VoidCallback callback) failure,
   }) {
     return failure(error, callback);
   }
@@ -546,7 +546,7 @@ class _$_Failure<T> implements _Failure<T> {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(T? model)? success,
-    TResult Function(BaseModel error, VoidCallback callback)? failure,
+    TResult Function(RemoteBaseModel error, VoidCallback callback)? failure,
   }) {
     return failure?.call(error, callback);
   }
@@ -557,7 +557,7 @@ class _$_Failure<T> implements _Failure<T> {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(T? model)? success,
-    TResult Function(BaseModel error, VoidCallback callback)? failure,
+    TResult Function(RemoteBaseModel error, VoidCallback callback)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -605,10 +605,10 @@ class _$_Failure<T> implements _Failure<T> {
 }
 
 abstract class _Failure<T> implements UserModuleBaseState<T> {
-  const factory _Failure(final BaseModel error, final VoidCallback callback) =
+  const factory _Failure(final RemoteBaseModel error, final VoidCallback callback) =
       _$_Failure<T>;
 
-  BaseModel get error => throw _privateConstructorUsedError;
+  RemoteBaseModel get error => throw _privateConstructorUsedError;
   VoidCallback get callback => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$_FailureCopyWith<T, _$_Failure<T>> get copyWith =>

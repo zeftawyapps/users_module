@@ -1,3 +1,4 @@
+
 import '../bass_errors.dart';
 
 class SocketError extends BaseError {

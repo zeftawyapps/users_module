@@ -6,7 +6,7 @@ import '../source/account_actions.dart';
 import '../utilis/firebase/fireBase_exception_consts.dart';
 import '../utilis/models/base_model.dart';
 import '../utilis/result/result.dart';
-import '../utilis/utilt_functions/util_functions.dart';
+import '../utilis/shardeprefrance/shard_check.dart';
 
 class ProfilRebo{
 
@@ -16,29 +16,16 @@ class ProfilRebo{
     _sharedRefrance = SharedPrefranceChecking();
      _accountActions = accountActions;
   }
-  Future<Result<BaseModel,  Map<String , dynamic >>> editProfile(  ) async {
-    try {
-      String uid =  await _sharedRefrance!.getUid();
-
-      var profileMapData =    await _accountActions.updateProfileData(id: uid   );
-
-      var profildata =    profileMapData ;
-      return Result.data(profildata);
-    } on FirebaseException catch (e) {
-      return Result.error(
-          BaseModel(message: handilExcepstons(e.code), status: e.code));
-    }
-  }
-  Future<Result<BaseModel, BaseUsersModel >> getProfile(  ) async {
+   Future<UserResult<RemoteBaseModel, UsersBaseModel >> getProfile(  ) async {
     try {
       String uid =  await _sharedRefrance!.getUid();
       _accountActions = UserProfileFirebaseActions();
       var profileMapData =    await _accountActions!.getData(uid );
-      BaseUsersModel  usersModel = BaseUsersModel . formJson(profileMapData);
-      return Result.data(usersModel);
+      UsersBaseModel  usersModel = UsersBaseModel . formJson(profileMapData);
+      return UserResult.data(usersModel);
     } on FirebaseException catch (e) {
-      return Result.error(
-          BaseModel(message: handilExcepstons(e.code), status: e.code));
+      return UserResult.error(
+          RemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
     }
   }
 

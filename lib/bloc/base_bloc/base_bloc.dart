@@ -26,7 +26,7 @@ class UserModuleBaseBloc<T> extends Cubit<UserModuleBaseState<T>> {
 
   }
 
-  void failedState(BaseModel error, VoidCallback callback){
+  void failedState(RemoteBaseModel error, VoidCallback callback){
     emit(UserModuleBaseState.failure(error, callback));
   }
 

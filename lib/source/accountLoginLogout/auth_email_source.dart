@@ -8,25 +8,31 @@ import 'package:users_module/utilis/firebase/firebase_account.dart';
 class EmailPassowrdAuthSource implements IAuthentication {
   String? email;
   String? pass;
+  String? name;
   FirebaseAccount? _accountRegist;
-  EmailPassowrdAuthSource({required String email, required String pass}) {
+  EmailPassowrdAuthSource({required String email, required String pass, this.name}) {
     this.email = email;
     this.pass = pass;
     _accountRegist = FirebaseAccount();
   }
   @override
-  Future<UserCredential> createAccount() async {
-    BaseUsersModel usersModel;
-    var user = await _accountRegist!.createNewAccount(this.email!, pass!);
-     return user;
+  Future<UsersBaseModel> createAccount({Map<String , dynamic >? body  }) async {
+
+    var user = await _accountRegist!.createNewAccount(this.email!, pass!  );
+   await  user.user!.updateDisplayName(this.name?? "user");
+UsersBaseModel usersModel;
+    String token = await user.user!.getIdToken() ?? "";
+    usersModel = UsersBaseModel(name: user.user!.displayName, email: user.user!.email, uid: user.user!.uid, token: token);
+    return usersModel;
   }
 
   @override
-  Future<UserCredential> logIn() async {
-    BaseUsersModel usersModel;
+  Future<UsersBaseModel> logIn() async {
+    UsersBaseModel usersModel;
     var user = await _accountRegist!.logIn(this.email!, pass!);
-
-     return user;
+    String token = await user.user!.getIdToken() ?? "";
+usersModel = UsersBaseModel(name: user.user!.displayName, email: user.user!.email, uid: user.user!.uid, token: token);
+     return usersModel;
   }
 
   @override

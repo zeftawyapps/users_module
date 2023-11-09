@@ -32,16 +32,22 @@ Map<String, dynamic>? data ;
   }
 
   @override
-  Future<Map<String, dynamic>> getData(String id) async {
-
+  Future<Map<String, dynamic>>  getData(String uid) async {
     CollectionReference firebaseCollection;
-    firebaseCollection = FirebaseFirestore.instance.collection(CollectionsName.usersAccountData);
-    QuerySnapshot  doc = await firebaseCollection.where( "id", isEqualTo:id ).limit(1).get() ;
-    var data =   FirebaseLoadingData().getDataSnapshotOpjectToMap(doc).first;
+    firebaseCollection =
+        FirebaseFirestore.instance.collection(CollectionsName.usersAccountData);
+    QuerySnapshot doc = await firebaseCollection.where("uid", isEqualTo: uid)
+        .limit(1)
+        .get();
 
-   return   data ;
+    var data = FirebaseLoadingData().getDataSnapshotOpjectToMap(doc);
+    var result = data.length;
+    if (result == 0) {
+      return {};
+    } else {
+      return data.first;
+    }
   }
-
   @override
   Future updateProfileData({  required  String id  }) async {
    String docid = await _firebaseLoadingData!.getCollrection(CollectionsName.usersAccountData).where("id", isEqualTo: id).get().then((value) => value.docs.first.id);

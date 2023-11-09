@@ -1,6 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 
- class FirebaseAccount{
+ import 'package:firebase_auth/firebase_auth.dart';
+
+class FirebaseAccount{
 
 
   Future<UserCredential> logIn(String email, String pass) {

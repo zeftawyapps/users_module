@@ -28,6 +28,18 @@ import 'package:flutter/material.dart';
   return docData.data()! ;
   }
 
+  Future<Object> editDataCloudFirestoreSubColletion({required String path ,
+    required String id,
+
+    required Map<String, dynamic> mymap}) async {
+    CollectionReference firebaseCollection;
+    firebaseCollection = FirebaseFirestore.instance.collection(path );
+    await firebaseCollection.doc(id).update(mymap);
+
+    var docData = await  firebaseCollection.doc(id).get();
+    return docData.data()! ;
+  }
+
   Future<void> deleteDataCloudFirestoreOneDocument(
       {required String collection, required String id}) async {
     await Firebase.initializeApp();
@@ -35,7 +47,15 @@ import 'package:flutter/material.dart';
     firebaseCollection = FirebaseFirestore.instance.collection(collection);
     return firebaseCollection.doc(id).delete();
   }
+  Future<void> deleteDataCloudFirestoreOneDocumentSubCollection(
+      {required String path ,
 
+        required String id}) async {
+    await Firebase.initializeApp();
+    CollectionReference firebaseCollection;
+    firebaseCollection = FirebaseFirestore.instance.collection(path );
+    return firebaseCollection.doc(id).delete();
+  }
   Future<void> deleteDataCloudFirestoreAllCollection(
       {required String collection}) async {
     CollectionReference firebaseCollection;
@@ -43,13 +63,35 @@ import 'package:flutter/material.dart';
     return firebaseCollection.doc().delete();
   }
 
+
+
   Future<void> testFireStore() {
     return addDataCloudFirestore(collection: "Test", mymap: {"name": "Moaz"});
   }
+  Future<String> addDataCloudFirestoreSupCollection({required String path ,
+   String? id ,
+    required Map<String, dynamic> mymap}) async {
+    if (id == null) {
+      CollectionReference firebaseCollection;
+      firebaseCollection = FirebaseFirestore.instance.collection(path );
+      await firebaseCollection.add(mymap).then((value) {
+        this.firestoreDocmentid = value.id;
+      });
+    } else {
+      firestoreDocmentid = id;
+      CollectionReference firebaseCollection;
+      firebaseCollection = FirebaseFirestore.instance.collection(path);
+       await  firebaseCollection.doc(id).set(mymap);
+
+    }
+    return firestoreDocmentid ;
+  }
+
+
   Future<String> addDataCloudFirestore({required String collection,
     String? id,
     required Map<String, dynamic> mymap}) async {
-    if (id == null) {
+    if (id == null|| id=="") {
       CollectionReference firebaseCollection;
       firebaseCollection = FirebaseFirestore.instance.collection(collection);
       await firebaseCollection.add(mymap).then((value) {
@@ -59,11 +101,11 @@ import 'package:flutter/material.dart';
       firestoreDocmentid = id;
       CollectionReference firebaseCollection;
       firebaseCollection = FirebaseFirestore.instance.collection(collection);
-       await  firebaseCollection.doc(id).set(mymap);
+      await  firebaseCollection.doc(id).set(mymap);
 
     }
     return firestoreDocmentid ;
   }
 
 
-}
+   }

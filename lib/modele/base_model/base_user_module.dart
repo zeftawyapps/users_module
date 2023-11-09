@@ -1,29 +1,33 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:users_module/modele/base_model/interface_userModel.dart';
 
-  class BaseUsersModel implements IuserModel {
- static const  String idKey ="id" ;
+  class UsersBaseModel implements IuserModel {
+ static const  String idKey ="uid" ;
  static const  String? nameKey = "name";
  static   const  String? emailKey ="email";
+ static const  String? tokenKey ="token";
 
-  String? id ;
+  String? uid ;
   String? name;
   String? email;
-BaseUsersModel ({this.name , this.id , this.email });
+  String? token;
+UsersBaseModel ({this.name , this.uid , this.email  , this.token});
 
 
- BaseUsersModel.  formJson(Map<String , dynamic> json ){
-  id = json['id']== null ? null  : json['id'] ;
+ UsersBaseModel.  formJson(Map<String , dynamic> json ){
+  uid = json['uid']== null ? null  : json['uid'] ;
   name = json['name']== null ? null  : json['name'] ;
   email = json['email']== null ? null  : json['email'] ;
+  token = json['token']== null ? ""  : json['token'] ;
  map = json ;
  }
  @mustBeOverridden
   Map<String, dynamic> toJson() {
     final _data =   map ;
-    _data['id'] = id ;
+    _data['uid'] = uid ;
     _data['name'] = name ;
     _data['email'] = email ;
+    _data['token'] = token ;
     return _data ;
   }
 

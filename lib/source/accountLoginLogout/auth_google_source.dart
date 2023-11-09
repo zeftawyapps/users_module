@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:users_module/interface/account.dart';
+import 'package:users_module/modele/base_model/base_user_module.dart';
 
 import '../../utilis/firebase/firebase_account.dart';
 
@@ -12,21 +13,22 @@ class GoogleAuthSoucre extends IAuthentication {
   }
 
   @override
-  Future<UserCredential> createAccount()async{
+  Future<UsersBaseModel> createAccount({Map<String , dynamic >? body  })async{
  var user =await   _signInWithGoogle();
  if (user == null) {
    throw Exception('user is  null ');
  }
- return user ;
+
+ return UsersBaseModel(name: user.user!.displayName, email: user.user!.email, uid: user.user!.uid, token: await  user.user!.getIdToken() ?? "");
   }
 
   @override
-  Future<UserCredential> logIn() async{
+  Future<UsersBaseModel> logIn() async{
     var user =await   _signInWithGoogle();
     if (user == null) {
       throw Exception('user is  null ');
     }
-    return user ;
+    return  UsersBaseModel(name: user.user!.displayName, email: user.user!.email, uid: user.user!.uid, token: await  user.user!.getIdToken() ?? "") ;
   }
 
   @override

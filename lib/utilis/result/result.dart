@@ -1,11 +1,11 @@
 
 import '../models/base_model.dart';
 
-class Result<Error extends BaseModel, Data> {
+class UserResult<Error extends RemoteBaseModel, Data> {
   final Data? data;
   final Error? error;
 
-  Result({this.data, this.error}) : assert(data != null || error != null);
+  UserResult({this.data, this.error}) : assert(data != null || error != null);
 
   /// checks whether data is available
   bool get hasDataOnly => data != null && error == null;
@@ -18,38 +18,38 @@ class Result<Error extends BaseModel, Data> {
   bool get hasDataAndError => data != null && error != null;
 
   /// returns the error
-  factory Result.error(Error error) {
-    return Result(
+  factory UserResult.error(Error error) {
+    return UserResult(
       error: error,
-      data: null,
+
     );
   }
 
   /// returns just data
-  factory Result.data( Data? data ) {
-    return Result(
+  factory UserResult.data( Data? data ) {
+    return UserResult(
       error: null,
       data: data,
     );
   }
 
   /// returns error and data
-  factory Result.dataWithError(Data? data,Error error) {
-    return Result(
+  factory UserResult.dataWithError(Data? data,Error error) {
+    return UserResult(
       error: error,
       data: data,
     );
   }
 
   /// forwards the error if present else forwards the data
-  factory Result.forward(Result _result, Data? data) {
+  factory UserResult.forward(UserResult _result, Data? data) {
     if (_result.hasErrorOnly) {
-      return Result.error(_result.error as Error);
+      return UserResult.error(_result.error as Error);
     }
-     return Result.data(data);
+     return UserResult.data(data);
   }
 
-  fold({required Result Function(Error error) onError,required Result Function(Data data) onData}) {
+  fold({required UserResult Function(Error error) onError,required UserResult Function(Data data) onData}) {
     if(hasDataOnly) {
       return onData;
     } else {
