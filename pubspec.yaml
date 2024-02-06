@@ -2,6 +2,7 @@ name: users_module
 description: A new Flutter project.
 version: 0.0.1
 homepage:
+path_provider: ^2.0.2
 
 environment:
   sdk: '>=3.0.6 <4.0.0'
@@ -14,7 +15,7 @@ dependencies:
   cloud_firestore:
   firebase_auth: ^4.8.0
   firebase_storage:
-
+  flutter_pdfview: ^1.2.7
   flutter_bloc: ^8.1.1
   freezed_annotation: ^1.1.0
   shared_preferences: ^2.0.18
@@ -23,6 +24,7 @@ dependencies:
   dartz: ^0.10.0-nullsafety.2
   pretty_dio_logger: ^1.0.0
   google_sign_in: ^5.0.4
+  path_provider: ^2.0.2
 
 
 

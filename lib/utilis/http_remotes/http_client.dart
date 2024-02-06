@@ -49,6 +49,10 @@ class UserHttpClient {
          QuizHttpHeader().usertoken;
       _client.options.headers["Authorization"] = authorizationHeader;
       _client.options.headers["Content-Type"] = "application/json";
+      _client.options.headers["Accept"] = "*/*";
+      _client.options.headers["Accept-Encoding"] = "gzip, deflate, br";
+      _client.options.headers["Connection"] = "keep-alive";
+      _client.options.headers["Content-Length"] = "0";
       // _client.options.headers["Content-Type"] = "application/json";
     }
   }
@@ -64,6 +68,7 @@ class UserHttpClient {
     // Get the response from the server
     Response response;
     try {
+      var headders = headers?? _client.options.headers;
       switch (method) {
         case HttpMethod.GET:
           response = await _client.get(
@@ -78,7 +83,7 @@ class UserHttpClient {
             url,
             data: body,
             queryParameters: queryParameters,
-            options: Options(headers: headers),
+            options: Options(headers:  headders),
             cancelToken: cancelToken,
           );
           break;
@@ -87,7 +92,7 @@ class UserHttpClient {
             url,
             data: body,
             queryParameters: queryParameters,
-            options: Options(headers: headers),
+            options: Options(headers:  headders),
             cancelToken: cancelToken,
           );
           break;
@@ -96,7 +101,7 @@ class UserHttpClient {
             url,
             data: body,
             queryParameters: queryParameters,
-            options: Options(headers: headers),
+            options: Options(headers:  headders),
             cancelToken: cancelToken,
           );
           break;
@@ -120,13 +125,14 @@ class UserHttpClient {
   }) async {
     // Get the response from the server
     Response<Map<String , dynamic>> response;
+    var headders = headers?? _client.options.headers;
     try {
       switch (method) {
         case HttpMethod.GET:
           response = await _client.get(
             url,
             queryParameters: queryParameters,
-            options: Options(headers: headers),
+            options: Options(headers: headders),
             cancelToken: cancelToken,
           );
           break;
@@ -135,7 +141,7 @@ class UserHttpClient {
             url,
             data: body,
             queryParameters: queryParameters,
-            options: Options(headers: headers),
+            options: Options(headers: headders),
             cancelToken: cancelToken,
           );
           break;
@@ -144,7 +150,7 @@ class UserHttpClient {
             url,
             data: body,
             queryParameters: queryParameters,
-            options: Options(headers: headers),
+            options: Options(headers: headders),
             cancelToken: cancelToken,
           );
           break;
@@ -153,7 +159,7 @@ class UserHttpClient {
             url,
             data: body,
             queryParameters: queryParameters,
-            options: Options(headers: headers),
+            options: Options(headers: headders),
             cancelToken: cancelToken,
           );
           break;
@@ -213,12 +219,14 @@ class UserHttpClient {
     // Get the response from the server
     Response<T> response;
     try {
+      var headders = headers?? _client.options.headers;
+
       switch (method) {
         case HttpMethod.GET:
           response = await _client.get(
             url,
             queryParameters: queryParameters,
-            options: Options(headers: headers),
+            options: Options(headers: headders),
             cancelToken: cancelToken,
           );
           break;
@@ -227,7 +235,7 @@ class UserHttpClient {
             url,
             data: body,
             queryParameters: queryParameters,
-            options: Options(headers: headers),
+            options: Options(headers: headders),
             cancelToken: cancelToken,
           );
           break;
@@ -236,7 +244,7 @@ class UserHttpClient {
             url,
             data: body,
             queryParameters: queryParameters,
-            options: Options(headers: headers),
+            options: Options(headers: headders),
             cancelToken: cancelToken,
           );
           break;
@@ -245,7 +253,7 @@ class UserHttpClient {
             url,
             data: body,
             queryParameters: queryParameters,
-            options: Options(headers: headers),
+            options: Options(headers: headders),
             cancelToken: cancelToken,
           );
           break;
@@ -254,7 +262,8 @@ class UserHttpClient {
         /// dismiss progress dialog
 
         // Get the decoded json
-        return response.data!  as Map<String ,dynamic >;
+
+      return  {    "status" : "done" , "data":  response.data  };
       } on FormatException catch (e) {
         /// dismiss progress dialog
 
@@ -305,12 +314,13 @@ class UserHttpClient {
     // Get the response from the server
     Response response;
     try {
+      var headders = headers?? _client.options.headers;
       switch (method) {
         case HttpMethod.GET:
           response = await _client.get(
             url,
             queryParameters: queryParameters,
-            options: Options(headers: headers),
+            options: Options(headers:  headders),
             cancelToken: cancelToken,
 
           );
@@ -320,7 +330,7 @@ class UserHttpClient {
             url,
             data: body,
             queryParameters: queryParameters,
-            options: Options(headers: headers),
+            options: Options(headers:  headders),
             cancelToken: cancelToken,
           );
           break;
@@ -329,7 +339,7 @@ class UserHttpClient {
             url,
             data: body,
             queryParameters: queryParameters,
-            options: Options(headers: headers),
+            options: Options(headers:  headders),
             cancelToken: cancelToken,
           );
           break;
@@ -338,7 +348,7 @@ class UserHttpClient {
             url,
             data: body,
             queryParameters: queryParameters,
-            options: Options(headers: headers),
+            options: Options(headers:  headders),
             cancelToken: cancelToken,
           );
           break;

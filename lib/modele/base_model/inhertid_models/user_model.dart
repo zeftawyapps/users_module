@@ -8,7 +8,8 @@ class UserModule extends UsersBaseModel {
   String? phone;
   int? type = 0;
   UserModule(
-      {this.address,
+      {this.address =  "",
+
       this.phone,
       this.type = 0,
       String? id,

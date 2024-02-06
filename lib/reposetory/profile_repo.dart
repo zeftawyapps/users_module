@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../interface/actions.dart';
+import '../interface/base/actions.dart';
+import '../interface/base/actions.dart';
 import '../modele/base_model/base_user_module.dart';
 import '../source/account_actions.dart';
 import '../utilis/firebase/fireBase_exception_consts.dart';
@@ -11,8 +12,8 @@ import '../utilis/shardeprefrance/shard_check.dart';
 class ProfilRebo{
 
   SharedPrefranceChecking ? _sharedRefrance ;
- late IAccountActions _accountActions;
-  ProfilRebo(IAccountActions accountActions){
+ late IBaseAccountActions _accountActions;
+  ProfilRebo(IBaseAccountActions accountActions){
     _sharedRefrance = SharedPrefranceChecking();
      _accountActions = accountActions;
   }
@@ -28,5 +29,17 @@ class ProfilRebo{
           RemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
     }
   }
+  Future<UserResult<RemoteBaseModel, UsersBaseModel >> editProfile( Map<String ,dynamic> map  ) async {
+    try {
+      String uid =  await _sharedRefrance!.getUid();
+      _accountActions = UserProfileFirebaseActions();
+       var result  =   await _accountActions.updateProfileData(id: uid , mapData: map );
+      UsersBaseModel  usersModel = UsersBaseModel . formJson(result);
+      return UserResult.data(usersModel);
 
+    } on FirebaseException catch (e) {
+      return UserResult.error(
+          RemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
+    }
+  }
 }

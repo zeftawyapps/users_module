@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-abstract class IAccountActions{
+abstract class IBaseAccountActions{
   Future createProfileData({ required  String id,required  Map<String, dynamic> data});
-  Future updateProfileData({ required  String id });
+  Future<Map<String , dynamic>> updateProfileData({ required  String id  , Map<String , dynamic >?mapData });
   Future<Map<String , dynamic>>getData(String id );
 }
 

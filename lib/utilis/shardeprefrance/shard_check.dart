@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:users_module/modele/base_model/base_user_module.dart';
 import 'package:users_module/utilis/shardeprefrance/shardPrfrance.dart';
+import 'package:users_module/utilis/shardeprefrance/user_data_stored.dart';
 
 import '../../modele/base_model/inhertid_models/shardUserModel.dart';
 
@@ -20,7 +21,9 @@ class SharedPrefranceChecking {
 print ("token : $token");
 print ("email : $email");
 print ("uid : $uid");
-       isRegistAction( ShardUserModel(email: email , pass: pass ,uid: uid , token: token )  );
+var modele = ShardUserModel(email: email , pass: pass ,uid: uid , token: token ) ;
+UserDataStored().setUserData(modele);
+       isRegistAction(  modele );
      } else {
        NotRegistAction();
      }
@@ -31,6 +34,8 @@ Future<String > getUid() async{
 
   }
   Future setDataInShardRefrace ({String? email, String? pass , String? uid , String? token  })async {
+   var modele =    ShardUserModel(email: email , pass: pass ,uid: uid , token: token ) ;
+   UserDataStored().setUserData(modele);
     var data = await    SharedPreferences.getInstance();
     await data.setBool(SharedPrefranceData.USER_ISREJESTED, true  );
     await   data.setString(SharedPrefranceData.USER_EMAIL,email ?? ""  );

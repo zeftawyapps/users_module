@@ -2,7 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:users_module/https/commerce_http_urls.dart';
-import 'package:users_module/interface/account.dart';
+import 'package:users_module/interface/base/account.dart';
+import 'package:users_module/interface/http_acc.dart';
 import 'package:users_module/modele/base_model/base_user_module.dart';
 import 'package:users_module/utilis/firebase/firebase_account.dart';
 
@@ -11,12 +12,12 @@ import '../../../utilis/http_remotes/http_client.dart';
 import '../../../utilis/http_remotes/http_methos_enum.dart';
 
 
-class EmailPassowrdAuthHttpSource implements IAuthentication {
+class AuthHttpSource implements IHttpAuthentication {
   String? email;
   String? pass;
   String? name;
 
-  EmailPassowrdAuthHttpSource({required String email, required String pass }) {
+  AuthHttpSource({required String email, required String pass }) {
     this.email = email;
     this.pass = pass;
 
@@ -30,7 +31,7 @@ allBody.addAll(body!  );
         url: ApiUrls.createAccount,
         body:  allBody  ,
         cancelToken: CancelToken());
-    var data = user[UsersUrlEnveiroment().endPoints!.data];
+    var data = user ;
     return UsersBaseModel.formJson(data) ;
   }
 
@@ -42,8 +43,20 @@ allBody.addAll(body!  );
         url: ApiUrls.logIn,
         body:  {"email": email , "password": pass}   ,
         cancelToken: CancelToken());
- var data = user["data"];
-    return UsersBaseModel.formJson(data) ;
+
+    var status = user["status"];
+    if (status != 200) {
+      throw Exception(user );
+    }
+
+
+    var data = user["data"];
+ Map<String ,dynamic>userData = {};
+    userData["email"] = email  ;
+    userData["token"] = data["token"]  ;
+    userData.addAll(data);
+
+    return UsersBaseModel.formJson(userData!) ;
   }
 
   @override

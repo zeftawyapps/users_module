@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:users_module/interface/account.dart';
+import 'package:users_module/interface/base/account.dart';
+import 'package:users_module/interface/http_acc.dart';
 import 'package:users_module/modele/base_model/base_user_module.dart';
 import 'package:users_module/source/account_actions.dart';
 import 'package:users_module/source/http/account_actions.dart';
@@ -10,21 +11,21 @@ import 'package:users_module/users_http_urls.dart';
 import 'package:users_module/utilis/models/base_model.dart';
 import 'package:users_module/utilis/result/result.dart';
 
-import '../interface/actions.dart';
+import '../interface/base/actions.dart';
 import '../modele/base_model/inhertid_models/user_model.dart';
 import '../source/accountLoginLogout/http/auth_http_acc.dart';
 import '../utilis/firebase/fireBase_exception_consts.dart';
 
 class AuthRepo {
-  IAccountActions? _accountActions;
-  late IAuthentication _account;
-  AuthRepo(IAuthentication account) {
+  IBaseAccountActions? _accountActions;
+  late IBaseAuthentication _account;
+  AuthRepo(IBaseAuthentication account) {
     _account = account;
   }
 
   Future<UserResult<RemoteBaseModel, UsersBaseModel>> logIn() async {
     try {
-      if (_account is EmailPassowrdAuthHttpSource) {
+      if (_account is IHttpAuthentication) {
         return _logInHttp();
       } else {
         return _logInFirebase();
@@ -38,7 +39,7 @@ class AuthRepo {
   Future<UserResult<RemoteBaseModel, UsersBaseModel>> createAccount(
       {UsersBaseModel? usersModel}) async {
     try {
-      if (_account is EmailPassowrdAuthHttpSource) {
+      if (_account is IHttpAuthentication) {
         return _createAccountHttp();
       } else {
         return _createAccountFirebase();
@@ -52,7 +53,7 @@ class AuthRepo {
   Future<UserResult<RemoteBaseModel, UsersBaseModel>> createAccountAndProfile(
       UsersBaseModel usersModel) async {
     try {
-      if (_account is EmailPassowrdAuthHttpSource) {
+      if (_account is IHttpAuthentication) {
         return _createAccountAndProfileHttp(usersModel);
       } else {
         return _createAccountAndProfileFirebase(usersModel);

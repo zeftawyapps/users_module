@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../modele/base_model/base_user_module.dart';
+import '../../modele/base_model/base_user_module.dart';
 
-abstract class IAuthentication{
+abstract class IBaseAuthentication{
 
  Future<UsersBaseModel>  createAccount( {Map<String , dynamic >? body  });
  Future <UsersBaseModel> logIn();

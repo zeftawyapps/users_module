@@ -4,7 +4,7 @@ import 'package:users_module/utilis/http_remotes/http_client.dart';
 
 import '../constes/api_urls.dart';
 import '../constes/collections.dart';
-import '../interface/actions.dart';
+import '../interface/base/actions.dart';
 import '../modele/base_model/base_user_module.dart';
 import '../source/account_actions.dart';
 import '../source/http/sub_profile.dart';

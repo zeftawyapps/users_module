@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:users_module/interface/account.dart';
+import 'package:users_module/interface/base/account.dart';
+import 'package:users_module/interface/firebase_acc.dart';
 import 'package:users_module/modele/base_model/base_user_module.dart';
 
 import '../../utilis/firebase/firebase_account.dart';
 
-class GoogleAuthSoucre extends IAuthentication {
+class GoogleAuthSoucre extends IFirebaseAuthentication {
   FirebaseAccount? _accountRegist;
 
   GoogleAuthSoucre() {

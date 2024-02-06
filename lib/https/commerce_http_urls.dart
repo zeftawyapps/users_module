@@ -5,12 +5,30 @@ class UsersUrlEnveiroment {
 
   String? baseUrl = "https://eventapp-api.herokuapp.com/api/v1";
 
- var   _endPoints ;
+ var _endPoints ;
  var _response ;
   static final UsersUrlEnveiroment _baseUrlEnvet = UsersUrlEnveiroment._internal();
   factory UsersUrlEnveiroment ({String? baseUrl}) {
 
-    return _baseUrlEnvet;
+    if (baseUrl != null) _baseUrlEnvet.baseUrl = baseUrl;
+    if (_baseUrlEnvet._endPoints == null) {
+      _baseUrlEnvet._endPoints = (
+      testConnection: "${_baseUrlEnvet.baseUrl}${"/testConnection"}",
+      logIn: "${_baseUrlEnvet.baseUrl}${"/login"}",
+      createAccount: "${_baseUrlEnvet.baseUrl}${"/createAcc"}",
+      createAccountAndProfile: "${_baseUrlEnvet.baseUrl}${"/creatAccAndprof"}",
+      getProfile: "${_baseUrlEnvet.baseUrl}${"/getProf"}",
+      updateProfile: "${_baseUrlEnvet.baseUrl}${"/update"}",
+      updatePassword: "${_baseUrlEnvet.baseUrl}${"updatePass"}",
+
+      data: "data",
+      error: "error",
+      message: "message",
+      status: "status,"
+      );
+    }
+
+     return _baseUrlEnvet;
   }
 
   factory UsersUrlEnveiroment .urls({ String? baseUrl ,  String ? testConnection
@@ -21,7 +39,6 @@ class UsersUrlEnveiroment {
     _baseUrlEnvet._endPoints = (
     testConnection: "${_baseUrlEnvet.baseUrl}${testConnection ??"/testConnection"}",
     logIn: "${_baseUrlEnvet.baseUrl}${logIn??"/login"}",
-
     createAccount: "${_baseUrlEnvet.baseUrl}${createAccount??"/createAcc"}",
     createAccountAndProfile: "${_baseUrlEnvet.baseUrl}${createAccountAndProfile??"/creatAccAndprof"}",
     getProfile: "${_baseUrlEnvet.baseUrl}${getProfile??"/getProf"}",
@@ -30,8 +47,7 @@ class UsersUrlEnveiroment {
     data:   "data",
     error:  "error",
     message: "message",
-    status:  "status,"
-
+    status:  "status"
     ) ;
     return _baseUrlEnvet;
   }

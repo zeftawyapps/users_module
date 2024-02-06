@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:users_module/constes/collections.dart';
-import 'package:users_module/interface/actions.dart';
+import 'package:users_module/interface/base/actions.dart';
 import 'package:users_module/utilis/firebase/firebase_and_storage_action.dart';
 
 import '../modele/base_model/base_user_module.dart';
