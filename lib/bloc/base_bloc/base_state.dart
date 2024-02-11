@@ -11,5 +11,5 @@ class UserModuleBaseState<T> with _$BaseState<T>{
   const factory UserModuleBaseState.init() = _Init;
   const factory UserModuleBaseState.loading() = _Loading;
   const factory UserModuleBaseState.success([T? model]) = _Success<T>;
-  const factory UserModuleBaseState.failure(RemoteBaseModel error, VoidCallback callback) = _Failure;
+  const factory UserModuleBaseState.failure(EducationRemoteBaseModel error, VoidCallback callback) = _Failure;
 }

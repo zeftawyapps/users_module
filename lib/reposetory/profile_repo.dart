@@ -17,7 +17,7 @@ class ProfilRebo{
     _sharedRefrance = SharedPrefranceChecking();
      _accountActions = accountActions;
   }
-   Future<UserResult<RemoteBaseModel, UsersBaseModel >> getProfile(  ) async {
+   Future<UserResult<EducationRemoteBaseModel, UsersBaseModel >> getProfile(  ) async {
     try {
       String uid =  await _sharedRefrance!.getUid();
       _accountActions = UserProfileFirebaseActions();
@@ -26,10 +26,10 @@ class ProfilRebo{
       return UserResult.data(usersModel);
     } on FirebaseException catch (e) {
       return UserResult.error(
-          RemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
+          EducationRemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
     }
   }
-  Future<UserResult<RemoteBaseModel, UsersBaseModel >> editProfile( Map<String ,dynamic> map  ) async {
+  Future<UserResult<EducationRemoteBaseModel, UsersBaseModel >> editProfile( Map<String ,dynamic> map  ) async {
     try {
       String uid =  await _sharedRefrance!.getUid();
       _accountActions = UserProfileFirebaseActions();
@@ -39,7 +39,7 @@ class ProfilRebo{
 
     } on FirebaseException catch (e) {
       return UserResult.error(
-          RemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
+          EducationRemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
     }
   }
 }

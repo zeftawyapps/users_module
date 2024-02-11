@@ -23,7 +23,7 @@ class AuthRepo {
     _account = account;
   }
 
-  Future<UserResult<RemoteBaseModel, UsersBaseModel>> logIn() async {
+  Future<UserResult<EducationRemoteBaseModel, UsersBaseModel>> logIn() async {
     try {
       if (_account is IHttpAuthentication) {
         return _logInHttp();
@@ -32,11 +32,11 @@ class AuthRepo {
       }
     } on FirebaseException catch (e) {
       return UserResult.error(
-          RemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
+          EducationRemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
     }
   }
 
-  Future<UserResult<RemoteBaseModel, UsersBaseModel>> createAccount(
+  Future<UserResult<EducationRemoteBaseModel, UsersBaseModel>> createAccount(
       {UsersBaseModel? usersModel}) async {
     try {
       if (_account is IHttpAuthentication) {
@@ -46,11 +46,11 @@ class AuthRepo {
       }
     } on FirebaseException catch (e) {
       return UserResult.error(
-          RemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
+          EducationRemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
     }
   }
 
-  Future<UserResult<RemoteBaseModel, UsersBaseModel>> createAccountAndProfile(
+  Future<UserResult<EducationRemoteBaseModel, UsersBaseModel>> createAccountAndProfile(
       UsersBaseModel usersModel) async {
     try {
       if (_account is IHttpAuthentication) {
@@ -60,7 +60,7 @@ class AuthRepo {
       }
     } on FirebaseException catch (e) {
       return UserResult.error(
-          RemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
+          EducationRemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
     }
   }
 
@@ -68,7 +68,7 @@ class AuthRepo {
     _account.logOut();
   }
 
-  Future<UserResult<RemoteBaseModel, UsersBaseModel>> _logInFirebase() async {
+  Future<UserResult<EducationRemoteBaseModel, UsersBaseModel>> _logInFirebase() async {
     try {
       var user = await _account.logIn();
 
@@ -81,22 +81,22 @@ class AuthRepo {
       return UserResult.data(user);
     } on FirebaseException catch (e) {
       return UserResult.error(
-          RemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
+          EducationRemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
     }
   }
 
-  Future<UserResult<RemoteBaseModel, UsersBaseModel>> _logInHttp() async {
+  Future<UserResult<EducationRemoteBaseModel, UsersBaseModel>> _logInHttp() async {
     try {
       var user = await _account.logIn();
 
       return UserResult.data(user);
     }  catch (e) {
       return UserResult.error(
-          RemoteBaseModel(message: e.toString()  , status: "error"));
+          EducationRemoteBaseModel(message: e.toString()  , status: "error"));
     }
   }
 
-  Future<UserResult<RemoteBaseModel, UsersBaseModel>>
+  Future<UserResult<EducationRemoteBaseModel, UsersBaseModel>>
       _createAccountHttp() async {
     try {
       var user = await _account.createAccount();
@@ -104,11 +104,11 @@ class AuthRepo {
       return UserResult.data(user);
     } on FirebaseException catch (e) {
       return UserResult.error(
-          RemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
+          EducationRemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
     }
   }
 
-  Future<UserResult<RemoteBaseModel, UsersBaseModel>>
+  Future<UserResult<EducationRemoteBaseModel, UsersBaseModel>>
       _createAccountFirebase() async {
     try {
       var user = await _account.createAccount();
@@ -130,11 +130,11 @@ class AuthRepo {
       return UserResult.data(user);
     } on FirebaseException catch (e) {
       return UserResult.error(
-          RemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
+          EducationRemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
     }
   }
 
-  Future<UserResult<RemoteBaseModel, UsersBaseModel>>
+  Future<UserResult<EducationRemoteBaseModel, UsersBaseModel>>
       _createAccountAndProfileFirebase(UsersBaseModel usersModel) async {
     try {
       var user = await _account.createAccount();
@@ -153,11 +153,11 @@ class AuthRepo {
       return UserResult.data(usersModel);
     } on FirebaseException catch (e) {
       return UserResult.error(
-          RemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
+          EducationRemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
     }
   }
 
-  Future<UserResult<RemoteBaseModel, UsersBaseModel>>
+  Future<UserResult<EducationRemoteBaseModel, UsersBaseModel>>
       _createAccountAndProfileHttp(UsersBaseModel usersModel) async {
     try {
       var user = await _account.createAccount(body: usersModel.toJson());
@@ -173,7 +173,7 @@ class AuthRepo {
       return UserResult.data(busersModel);
     }  catch (e) {
       return UserResult.error(
-          RemoteBaseModel(message: e.toString()  , status: "error"));
+          EducationRemoteBaseModel(message: e.toString()  , status: "error"));
     }
   }
 }

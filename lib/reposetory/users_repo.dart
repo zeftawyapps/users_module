@@ -9,7 +9,7 @@ class UsersRepo {
 
   UsersRepo(this._usersApi);
 
-  Future< UserResult<RemoteBaseModel, List<UserModule>>> getUsersUserFirebase() async {
+  Future< UserResult<EducationRemoteBaseModel, List<UserModule>>> getUsersUserFirebase() async {
     UsersSources  usersSources = UsersSources();
     var data = await usersSources.getUsers();
     return  UserResult(data: data , error: null);

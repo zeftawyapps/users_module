@@ -8,7 +8,7 @@ import '../../utilis/result/result.dart';
 
 class HttpSubProfile   {
   @override
-  Future<UserResult<RemoteBaseModel, Map<String , dynamic>>>  setGameResult(
+  Future<UserResult<EducationRemoteBaseModel, Map<String , dynamic>>>  setGameResult(
       Map<String , dynamic > body  ) async {
     return await UserHttpClient.UserzHttpClient(userToken: true).sendRequestResult(
         method: HttpMethod.POST,

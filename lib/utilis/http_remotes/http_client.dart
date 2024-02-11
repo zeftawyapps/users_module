@@ -36,9 +36,9 @@ class UserHttpClient {
   UserHttpClient.UserzHttpClient({this.baseUrl   , userToken = false}) {
     baseUrl = ApiUrls.BASE_URL;
     BaseOptions _options = BaseOptions(
-      connectTimeout: 30000,
-      receiveTimeout: 30000,
-      sendTimeout: 30000,
+      connectTimeout: Duration(milliseconds: 30000),
+      receiveTimeout: Duration(milliseconds: 30000),
+      sendTimeout: Duration(milliseconds: 30000),
       responseType: ResponseType.json,
       baseUrl: baseUrl!,
     );
@@ -115,7 +115,7 @@ class UserHttpClient {
     }
 
 
-  Future<UserResult<RemoteBaseModel, Map<String , dynamic> >> sendRequestResult<T>({
+  Future<UserResult<EducationRemoteBaseModel, Map<String , dynamic> >> sendRequestResult<T>({
     required HttpMethod method,
     required String url,
     Map<String, String>? headers,
@@ -174,12 +174,12 @@ class UserHttpClient {
         /// dismiss progress dialog
 
         debugPrint(e.toString());
-        return  UserResult. error (RemoteBaseModel(message: e.message));
+        return  UserResult. error (EducationRemoteBaseModel(message: e.message));
       } catch (e) {
         /// dismiss progress dialog
 
         debugPrint(e.toString());
-        return UserResult. error(RemoteBaseModel());
+        return UserResult. error(EducationRemoteBaseModel());
       }
     }
     // Handling errors
@@ -188,23 +188,23 @@ class UserHttpClient {
 
       print("e.response ${e.error}");
       var error = {"massage": e.response?.data["message"] ?? ""   };
-      return UserResult. error(RemoteBaseModel(message: error["massage"] , status: "error" , data:  "null"));
+      return UserResult. error(EducationRemoteBaseModel(message: error["massage"] , status: "error" , data:  "null"));
     }
 
     // Couldn't reach out the server
     on SocketException catch (e) {
       /// dismiss progress dialog
 
-      return UserResult. error(RemoteBaseModel(message: e.message));
+      return UserResult. error(EducationRemoteBaseModel(message: e.message));
     } on HttpException catch (e) {
       /// dismiss progress dialog
 
-      return UserResult. error(RemoteBaseModel(message: e.message));
+      return UserResult. error(EducationRemoteBaseModel(message: e.message));
     } catch (e, s) {
       /// dismiss progress dialog
 
       print('catch error s$s');
-      return UserResult. error(RemoteBaseModel(message: e.toString()));
+      return UserResult. error(EducationRemoteBaseModel(message: e.toString()));
     }
   }
 
@@ -303,7 +303,7 @@ class UserHttpClient {
       return  {"massage": e.toString() , "status" : "error" , "data":  "null"};
     }
   }
-  Future<Either<RemoteBaseModel, T>> sendRequest<T>({
+  Future<Either<EducationRemoteBaseModel, T>> sendRequest<T>({
     required HttpMethod method,
     required String url,
     Map<String, String>? headers,
@@ -362,12 +362,12 @@ class UserHttpClient {
         /// dismiss progress dialog
 
         debugPrint(e.toString());
-        return Left(RemoteBaseModel(message: e.message));
+        return Left(EducationRemoteBaseModel(message: e.message));
       } catch (e) {
         /// dismiss progress dialog
 
         debugPrint(e.toString());
-        return Left(RemoteBaseModel());
+        return Left(EducationRemoteBaseModel());
       }
     }
     // Handling errors
@@ -375,27 +375,27 @@ class UserHttpClient {
       /// dismiss progress dialog
 
       print("e.response ${e.error}");
-      return Left(RemoteBaseModel.fromJson(e.response?.data));
+      return Left(EducationRemoteBaseModel.fromJson(e.response?.data));
     }
 
     // Couldn't reach out the server
     on SocketException catch (e) {
       /// dismiss progress dialog
 
-      return Left(RemoteBaseModel(message: e.message));
+      return Left(EducationRemoteBaseModel(message: e.message));
     } on HttpException catch (e) {
       /// dismiss progress dialog
 
-      return Left(RemoteBaseModel(message: e.message));
+      return Left(EducationRemoteBaseModel(message: e.message));
     } catch (e, s) {
       /// dismiss progress dialog
 
       print('catch error s$s');
-      return Left(RemoteBaseModel(message: e.toString()));
+      return Left(EducationRemoteBaseModel(message: e.toString()));
     }
   }
 
-  Future<UserResult<RemoteBaseModel, T>> upload<T>({
+  Future<UserResult<EducationRemoteBaseModel, T>> upload<T>({
     required String url,
     required String fileKey,
     required String filePath,
@@ -432,61 +432,27 @@ class UserHttpClient {
         // Get the decoded json
         return  UserResult.data(response.data!);
       } on FormatException {
-        return UserResult.error( RemoteBaseModel(message: FormatError().toString() ,));
+        return UserResult.error( EducationRemoteBaseModel(message: FormatError().toString() ,));
       } catch (e) {
-        return  UserResult.error( RemoteBaseModel(message: e.toString() ,));
+        return  UserResult.error( EducationRemoteBaseModel(message: e.toString() ,));
       }
     }
     // Handling errors
     on DioError catch (e) {
-    return UserResult.error( RemoteBaseModel (message: e.message));
+    return UserResult.error( EducationRemoteBaseModel (message: e.message));
     }
     //  return Left(_handleDioError(e));
 
 
     // Couldn't reach out the server
     on SocketException {
-      return  UserResult.error( RemoteBaseModel(message: SocketError().toString() ,));
+      return  UserResult.error( EducationRemoteBaseModel(message: SocketError().toString() ,));
     } on HttpException {
-      return  UserResult.error( RemoteBaseModel(message: ConnectionError().toString() ,));
+      return  UserResult.error( EducationRemoteBaseModel(message: ConnectionError().toString() ,));
     } catch (e, s) {
       print('catch error s$s');
-      return  UserResult.error( RemoteBaseModel(message: e.toString() ,));
+      return  UserResult.error( EducationRemoteBaseModel(message: e.toString() ,));
     }
   }
 
-  BaseError _handleDioError<E>(DioError error) {
-    if (error.type == DioErrorType.other ||
-        error.type == DioErrorType.response) {
-      if (error.error is SocketException) return SocketError();
-      if (error.type == DioErrorType.response) {
-        switch (error.response!.statusCode) {
-          case 400:
-            return BadRequestError();
-          case 401:
-            return UnauthorizedError();
-          case 403:
-            return ForbiddenError();
-          case 404:
-            return NotFoundError();
-          case 409:
-            return ConflictError();
-          case 500:
-            return InternalServerError();
-          default:
-            return UnknownError();
-        }
-      }
-      return UnknownError();
-    } else {
-      if (error.type == DioErrorType.connectTimeout ||
-          error.type == DioErrorType.sendTimeout ||
-          error.type == DioErrorType.receiveTimeout) {
-        return TimeoutError();
-      } else if (error.type == DioErrorType.cancel) {
-        return CancelError("Cancel by user");
-      } else
-        return UnknownError();
-    }
   }
-}

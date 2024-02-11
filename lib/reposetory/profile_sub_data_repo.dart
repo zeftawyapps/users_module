@@ -23,7 +23,7 @@ class ProfileSubDataRebo {
   }
 
 
-  Future<UserResult<RemoteBaseModel, List<Map<String, dynamic>>>> getProfileSubData(
+  Future<UserResult<EducationRemoteBaseModel, List<Map<String, dynamic>>>> getProfileSubData(
       {  required String subCollection ,  required String docId, Query Function(Query query)? query}) async {
     try {
       String collection = CollectionsName.usersAccountData;
@@ -33,22 +33,22 @@ class ProfileSubDataRebo {
       return UserResult.data(profileMapData);
     } on FirebaseException catch (e) {
       return UserResult.error(
-          RemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
+          EducationRemoteBaseModel(message: handilExcepstons(e.code), status: e.code));
     }
   }
 
 
-  Future<UserResult<RemoteBaseModel, RemoteBaseModel>> setGameResult (
+  Future<UserResult<EducationRemoteBaseModel, EducationRemoteBaseModel>> setGameResult (
       {required Map<String , dynamic >body   }) async {
     var result = await HttpSubProfile().setGameResult(body);
-    RemoteBaseModel? data, error;
+    EducationRemoteBaseModel? data, error;
 
     result.pick(onData: (v) {
-      data = RemoteBaseModel(data: v["data"]);
+      data = EducationRemoteBaseModel(data: v["data"]);
     }, onError: (e) {
-      error = RemoteBaseModel(message: e.message, status: e.status);
+      error = EducationRemoteBaseModel(message: e.message, status: e.status);
     });
-    UserResult<RemoteBaseModel, RemoteBaseModel> dresult =
+    UserResult<EducationRemoteBaseModel, EducationRemoteBaseModel> dresult =
     UserResult(data: data, error: error);
     return dresult;
   }

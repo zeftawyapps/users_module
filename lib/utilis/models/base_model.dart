@@ -1,16 +1,16 @@
 import 'package:users_module/https/commerce_http_urls.dart';
 
-class RemoteBaseModel<T> {
+class EducationRemoteBaseModel<T> {
 
-  RemoteBaseModel({
+  EducationRemoteBaseModel({
     this.status,
     this.message,this.data
   });
   String? status;
   String? message;
 T?data ;
-  factory RemoteBaseModel.fromJson(Map<String, dynamic> json) {
-    return RemoteBaseModel(
+  factory EducationRemoteBaseModel.fromJson(Map<String, dynamic> json) {
+    return EducationRemoteBaseModel(
       status: json['${UsersUrlEnveiroment().endPoints.status}']??"" as String?,
       message: json['${UsersUrlEnveiroment().endPoints.message}']??"" as String?,
       data: json['${UsersUrlEnveiroment().endPoints.data}']??"" as T?,

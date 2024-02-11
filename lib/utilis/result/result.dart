@@ -1,7 +1,7 @@
 
 import '../models/base_model.dart';
 
-class UserResult<Error extends RemoteBaseModel, Data> {
+class UserResult<Error extends EducationRemoteBaseModel, Data> {
   final Data? data;
   final Error? error;
 
